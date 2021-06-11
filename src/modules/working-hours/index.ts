@@ -64,7 +64,7 @@ class WorkingHours {
   async setSlackPresence() {
     const desirablePresence = this.determinatePresence();
     if (desirablePresence !== this.currentPresence) {
-      const result = await slack.setPresence(
+      const result = await this.slack.setPresence(
         desirablePresence === 'away' ? 'away' : 'auto',
       );
       if (result) {
@@ -80,7 +80,7 @@ class WorkingHours {
   async setSlackStatus() {
     const desirableStatus = this.determinateStatus();
     if (desirableStatus.status_text !== this.currentStatus) {
-      const result = await slack.setStatus(desirableStatus);
+      const result = await this.slack.setStatus(desirableStatus);
       if (result) {
         console.log(
           `New profile status set to: ${desirableStatus.status_text}`,
