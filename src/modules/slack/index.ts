@@ -6,7 +6,7 @@ class Slack {
     this.requester = new this.fetcher(process.env.SLACK_API_KEY);
   }
 
-  async getStatus(): Promise<'active' | 'away'> {
+  async getPresence(): Promise<'active' | 'away'> {
     return new Promise(async (resolve, reject) => {
       const response = await this.requester.getData(
         `https://slack.com/api/users.getPresence?user=${process.env.SLACK_USER_ID}`,
@@ -19,7 +19,7 @@ class Slack {
     });
   }
 
-  async getProfileStatus(): Promise<string> {
+  async getStatus(): Promise<string> {
     return new Promise(async (resolve, reject) => {
       const response = await this.requester.getData(
         `https://slack.com/api/users.profile.get?user=${process.env.SLACK_USER_ID}`,
@@ -32,24 +32,24 @@ class Slack {
     });
   }
 
-  async setStatus(status: 'auto' | 'away'): Promise<boolean> {
+  async setPresence(presence: 'auto' | 'away'): Promise<boolean> {
     return new Promise(async resolve => {
       const response = await this.requester.postData(
         `https://slack.com/api/users.setPresence`,
         {
-          presence: status,
+          presence: presence,
         },
       );
       resolve(response.ok);
     });
   }
 
-  async setProfileStatus(profileStatus): Promise<boolean> {
+  async setStatus(status): Promise<boolean> {
     return new Promise(async resolve => {
       const response = await this.requester.postData(
         `https://slack.com/api/users.profile.set`,
         {
-          profile: profileStatus,
+          profile: status,
         },
       );
       resolve(response.ok);
