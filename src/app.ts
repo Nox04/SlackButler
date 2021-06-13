@@ -5,7 +5,7 @@ const WorkingHoursApi = require('./modules/working-hours');
 const holiday = new HolidaysApi();
 const slack = new SlackApi();
 
-//TODO: Validate weekends
+//TODO: Custom events list
 
 async function Butler() {
   const currentPresence = await slack.getPresence();

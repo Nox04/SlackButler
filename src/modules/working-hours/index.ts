@@ -20,6 +20,10 @@ class WorkingHours {
       status_text: 'Recovering',
       status_emoji: ':zzz:',
     },
+    weekend: {
+      status_text: 'Weekend',
+      status_emoji: ':umbrella_on_ground:',
+    },
   };
   private dayjs = require('dayjs');
   private SlackApi = require('../slack');
@@ -39,6 +43,8 @@ class WorkingHours {
   private determinatePresence(): 'active' | 'away' {
     if (this.isHoliday) {
       return 'away';
+    } else if ([0, 6].includes(this.dayjs().day())) {
+      return 'away';
     } else {
       const currentHour = this.dayjs().hour();
       return this.workingHours.includes(currentHour) ? 'active' : 'away';
@@ -48,6 +54,8 @@ class WorkingHours {
   private determinateStatus() {
     if (this.isHoliday) {
       return this.statuses.holiday;
+    } else if ([0, 6].includes(this.dayjs().day())) {
+      return this.statuses.weekend;
     } else {
       const currentHour = this.dayjs().hour();
       if (currentHour === 12) {
