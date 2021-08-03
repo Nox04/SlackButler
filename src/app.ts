@@ -6,6 +6,7 @@ const holiday = new HolidaysApi();
 const slack = new SlackApi();
 
 //TODO: Custom events list
+//TODO: Handle lost connection
 
 async function Butler() {
   const currentPresence = await slack.getPresence();

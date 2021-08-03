@@ -6,7 +6,7 @@ class WorkingHours {
   private readonly statuses = {
     focused: {
       status_text: 'Focused',
-      status_emoji: ':gameon:',
+      status_emoji: ':gon:',
     },
     eating: {
       status_text: 'Lunch',
